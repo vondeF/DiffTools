@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B88E2FF-577C-4E3C-A5AC-C7B0DB297132}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>sapphire_diffmaker</RootNamespace>
+    <AssemblyName>difftools</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DiffTools_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugSapphire|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\DebugSapphire\</OutputPath>
+    <DefineConstants>SAPPHIRE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAip|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\DebugAip\</OutputPath>
+    <DefineConstants>AIP</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <None Include="appsettings_aip.json" />
+    <None Include="appsettings_sapphire.json" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Association.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\AssociationEnd.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Attribute.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Class.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\ClassifierRole.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Collaboration.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Diagram.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\DiagramElement.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Generalization.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Model.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Node.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Package.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\Root.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\RootGostTaggedValue.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\TwoLanguagesObject.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Entities\XmlTag.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Mapper\NameSpace.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Mapper\RDFSMapper.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Services\UnitsDetectorService.cs" />
+    <Compile Include="ComponentsForReadingCanonicalModel\Utils\StringExtensions.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Entities\ChangeLogEntry.cs" />
+    <Compile Include="Entities\AppSettings.cs" />
+    <Compile Include="Entities\DiffSettings.cs" />
+    <Compile Include="Entities\GostXml.cs" />
+    <Compile Include="Entities\InvalidLaunchParametersException.cs" />
+    <Compile Include="Entities\PlatformLoggerAdapter.cs" />
+    <Compile Include="Services\ClassChecker.cs" />
+    <Compile Include="Services\DiffModelXmlChanger.cs" />
+    <Compile Include="Services\DiffMaker.cs" />
+    <Compile Include="Services\FileValidator.cs" />
+    <Compile Include="Services\XmlChanger.cs" />
+    <Compile Include="Services\ModelVersionReceiver.cs" />
+    <Compile Include="Services\Translator.cs" />
+    <Compile Include="Services\XmlLoader.cs" />
+    <Compile Include="Services\CanonicalModelXmlParser.cs" />
+    <Compile Include="Services\XmlSaver.cs" />
+    <Compile Include="UserControls\AppInformation_UserControl.xaml.cs">
+      <DependentUpon>AppInformation_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DiffsCreator_UserControl.xaml.cs">
+      <DependentUpon>DiffsCreator_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\XmlPreparator_UserControl.xaml.cs">
+      <DependentUpon>XmlPreparator_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DiffsCreator_ViewModel.cs" />
+    <Compile Include="ViewModels\XmlPreparator_ViewModel.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UserControls\AppInformation_UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DiffsCreator_UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\XmlPreparator_UserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Resources\Noto\NotoSans-Bold.ttf" />
+    <Resource Include="Resources\Noto\NotoSans-BoldItalic.ttf" />
+    <Resource Include="Resources\Noto\NotoSans-Italic.ttf" />
+    <Resource Include="Resources\Noto\NotoSans-Regular.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Black.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-BlackItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Bold.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-BoldItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Italic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Light.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-LightItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Medium.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-MediumItalic.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Regular.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-Thin.ttf" />
+    <Resource Include="Resources\Roboto\Roboto-ThinItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Bold.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-BoldItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Italic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Light.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-LightItalic.ttf" />
+    <Resource Include="Resources\Roboto\RobotoCondensed-Regular.ttf" />
+    <None Include="app.config" />
+    <None Include="changelog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="profile.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Target Name="CopyAppSettings" AfterTargets="Build">
+    <!-- Проверяем символ AIP, если есть — копируем appsettings_aip.json -->
+    <Copy SourceFiles="appsettings_aip.json" DestinationFiles="$(OutputPath)appsettings.json" Condition="$(DefineConstants.Contains('AIP'))" />
+    <!-- Проверяем символ SAPPHIRE, если есть — копируем appsettings_sapphire.json -->
+    <Copy SourceFiles="appsettings_sapphire.json" DestinationFiles="$(OutputPath)appsettings.json" Condition="$(DefineConstants.Contains('SAPPHIRE'))" />
+  </Target>
+  <ItemGroup Condition="$(DefineConstants.Contains('SAPPHIRE'))">
+    <Reference Include="Monitel.Mal.Context.CIM16, Version=265.13.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Mal.Context.CIM16.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="$(DefineConstants.Contains('AIP'))">
+    <Reference Include="Monitel.Mal.Context.CIM16">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Monitel\CK-11\Client\Monitel.Mal.Context.CIM16.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=5.3.2.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.5.3.2\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=5.3.2.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.5.3.2\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=10.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=10.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Configuration.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics, Version=10.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.EventLog, Version=10.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Logging.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.EventSource, Version=10.0.0.8, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Logging.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Core, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.161\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.AssemblyAttributes">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.AssemblyAttributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.DataContext.Tools">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.DataContext.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.Extensions.Authentication.Platform">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Extensions.Authentication.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.Mal, Version=3.54.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Mal.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.MappingService.Client">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.MappingService.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.ObjectDb.Client, Version=2.30.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.ObjectDb.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.ObjectDb.Client.DB">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.ObjectDb.Client.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.ObjectDb.Client.Rmq, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.ObjectDb.Client.Rmq.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.ObjectDb.Models, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.ObjectDb.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.ObjectDb.Primitives, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.ObjectDb.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.Platform.Settings, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Platform.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.PlatformInfrastructure, Version=6.12.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.PlatformInfrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.RabbitMQ.Infrastructure, Version=3.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.RabbitMQ.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.Serialization.CIMXML">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Serialization.CIMXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Monitel.Supervisor.Infrastructure">
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Monitel.Supervisor.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=4.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Enrichers.Environment, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Serilog.Enrichers.Environment.3.0.0\lib\net471\Serilog.Enrichers.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Extensions.Logging">
+      <HintPath>packages\Serilog.Extensions.Logging.8.0.0\lib\net462\Serilog.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Settings.Configuration, Version=10.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\Serilog.Settings.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\ia-sm-sipr1\c$\Program Files\Monitel\CK-11\Client\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DiffTools_icon.ico" />
+    <Resource Include="DiffTools_icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)*.*" "\\ia-sm-sipr1\c$\Users\fednov-ae\Downloads\Удаленная отладка\sapphire_difftools\bin\x64\DebugSapphire\" /Y /R /E /I</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="packages\MaterialDesignThemes.5.3.2\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.5.3.2\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MaterialDesignThemes.5.3.2\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.5.3.2\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

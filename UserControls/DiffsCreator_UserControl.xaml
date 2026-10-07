@@ -1,0 +1,286 @@
+﻿<UserControl x:Class="sapphire_diffmaker.UserControls.DiffsCreator_UserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:sapphire_diffmaker.UserControls"
+             xmlns:converters="clr-namespace:sapphire_diffmaker.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="850" d:DesignWidth="600"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="12"
+             FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+
+        <!-- Label-заголовки (справа) -->
+        <Style TargetType="TextBlock" x:Key="Label1">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <!-- Label-значения (слева) -->
+        <Style TargetType="TextBlock" x:Key="Label2">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="ComboBox1"
+               BasedOn="{StaticResource MaterialDesignComboBox}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="CheckBox" x:Key="CheckBox1"
+               BasedOn="{StaticResource MaterialDesignCheckBox}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="Button1"
+               BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="6"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonCancel"
+               BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="13,5,13,5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#FFE57373"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFE57373"/>
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="6"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox1"
+               BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="TextAlignment" Value="Justify"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBoxCenter"
+               BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="9"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" Name="Сервер"/>
+            <RowDefinition Height="1*" Name="Контекст"/>
+            <RowDefinition Height="1*" Name="Mrid"/>
+            <RowDefinition Height="1*" Name="Модуль"/>
+            <RowDefinition Height="1*" Name="Профиль1"/>
+            <RowDefinition Height="2*" Name="Профиль2"/>
+            <RowDefinition Height="1.2*" Name="Профиль3"/>
+            <RowDefinition Height="1*" Name="Игнор1"/>
+            <RowDefinition Height="2*" Name="Игнор2"/>
+            <RowDefinition Height="2*" Name="Заголовок"/>
+            <RowDefinition Height="2*" Name="Модели"/>
+            <RowDefinition Height="1.2*" Name="Запуск"/>
+            <RowDefinition Height="Auto" Name="ПрогрессБар"/>
+            <RowDefinition Height="Auto" Name="Отмена"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Сервер -->
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Наименование сервера:" Style="{StaticResource Label1}" />
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ServerName}" Style="{StaticResource Label2}"/>
+
+        <!-- Контекст -->
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Наименование контекста:" Style="{StaticResource Label1}" />
+        <ComboBox Grid.Column="1" Grid.Row="1"
+                  SelectedItem="{Binding SelectedDatabase}"
+                  ItemsSource="{Binding Databases}"
+                  DisplayMemberPath="Description"
+                  Style="{StaticResource ComboBox1}"/>
+
+        <!-- Модуль экспорта (карточка-фон) -->
+        <materialDesign:Card Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                             Background="#FFE0E7ED" Margin="5,5,5,0"
+                             UniformCornerRadius="6"
+                             materialDesign:ElevationAssist.Elevation="Dp1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Экспорт по mRID:" Style="{StaticResource Label1}" />
+        <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="{Binding IsMridExport}" Style="{StaticResource CheckBox1}"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Модуль экспорта:" Style="{StaticResource Label1}" />
+        <ComboBox Grid.Column="1" Grid.Row="3"
+                  SelectedItem="{Binding SelectedRdfProvider}"
+                  ItemsSource="{Binding RdfProviders}"
+                  Style="{StaticResource ComboBox1}"
+                  DisplayMemberPath="Name"
+                  IsEnabled="{Binding IsRdfProviderSelectionEnabled}"/>
+
+        <!-- Профиль (карточка-фон) -->
+        <materialDesign:Card Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="2"
+                             Background="#FFE0E7ED" Margin="5,5,5,0"
+                             UniformCornerRadius="6"
+                             materialDesign:ElevationAssist.Elevation="Dp1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Сравнить по профилю:" Style="{StaticResource Label1}" />
+        <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding IsProfileNeeded}" Style="{StaticResource CheckBox1}"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Путь к файлу профиля:" Style="{StaticResource Label1}"/>
+        <TextBox Grid.Column="1" Grid.Row="5"
+                 Text="{Binding SelectedProfilePath}"
+                 Style="{StaticResource TextBox1}"
+                 IsReadOnly="True" Margin="5,5,10,5"/>
+        <Button Grid.Column="1" Grid.Row="6"
+                Click="ButtonClick_ChooseProfile"
+                Style="{StaticResource Button1}"
+                Margin="5,5,10,5">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FolderOpen" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock Text="Выбрать профиль" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+        <!-- Игнорируемые классы (карточка-фон) -->
+        <materialDesign:Card Grid.Row="7" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                             Background="#FFE0E7ED" Margin="5,5,5,0"
+                             UniformCornerRadius="6"
+                             materialDesign:ElevationAssist.Elevation="Dp1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Игнорировать изм. по выбранным классам (кроме добавления и удаления объектов):" Style="{StaticResource Label1}"/>
+        <CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding AreSelectedClassesIngnored}" Style="{StaticResource CheckBox1}"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="8" Text="Выбранные классы (через запятую):" Style="{StaticResource Label1}"/>
+        <TextBox Grid.Column="1" Grid.Row="8"
+                 Text="{Binding IgnoringClasses}"
+                 Style="{StaticResource TextBox1}"
+                 materialDesign:HintAssist.Hint="Например: Class1, Class2"
+                 Margin="5,5,10,5"/>
+
+        <!-- Модель ДО -->
+        <materialDesign:Card Grid.Row="9" Grid.RowSpan="2" Grid.Column="0"
+                             Background="#FFFFD6D6" Margin="5,20,5,5"
+                             UniformCornerRadius="6"
+                             materialDesign:ElevationAssist.Elevation="Dp2"/>
+        <TextBlock Grid.Column="0" Grid.Row="9" Text="Модель ДО"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   FontSize="18" Margin="5" Foreground="#FFD45353" FontWeight="Bold"/>
+        <TextBox Grid.Column="0" Grid.Row="10"
+                 Text="{Binding ModelNumberBefore}"
+                 Style="{StaticResource TextBoxCenter}"
+                 VerticalAlignment="Center"/>
+
+        <!-- Модель ПОСЛЕ -->
+        <materialDesign:Card Grid.Row="9" Grid.RowSpan="2" Grid.Column="1"
+                             Background="#FFC8E7FF" Margin="5,20,5,5"
+                             UniformCornerRadius="6"
+                             materialDesign:ElevationAssist.Elevation="Dp2"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="Модель ПОСЛЕ"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   FontSize="18" Margin="5" Foreground="#FF4560B5" FontWeight="Bold"/>
+        <TextBox Grid.Column="1" Grid.Row="10"
+                 Text="{Binding ModelNumberAfter}"
+                 Style="{StaticResource TextBoxCenter}"
+                 VerticalAlignment="Center"/>
+
+        <!-- Запуск -->
+        <Button Grid.Row="11" Grid.ColumnSpan="2"
+                Click="ButtonClick_BeforeAfter"
+                IsEnabled="{Binding IsDiffCreatorEnabled}"
+                Style="{StaticResource Button1}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Compare" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock Text="Сравнить модель ДО и модель ПОСЛЕ" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+        <!-- Готовность к запуску -->
+        <!--<materialDesign:Card Grid.Row="12" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                             Margin="5" Background="Transparent"
+                             UniformCornerRadius="6"
+                             Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="CheckCircle" Foreground="DarkGreen"
+                                         Width="18" Height="18" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock Text="Приложение готово к запуску" Foreground="DarkGreen"
+                           FontWeight="DemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </materialDesign:Card>-->
+
+        <!-- Прогрессбар -->
+        <materialDesign:Card Grid.Row="12" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                     Background="#FFE0E7ED" Margin="5,0,5,0"
+                     UniformCornerRadius="6"
+                     materialDesign:ElevationAssist.Elevation="Dp1"
+                     Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <ProgressBar Grid.Row="12" Grid.ColumnSpan="2"
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Height="30"
+                     Margin="12,5,12,5"/>
+        <Border Grid.Row="12" Grid.ColumnSpan="2" Height="35" BorderBrush="#FFE0E7ED" BorderThickness="3" CornerRadius="6" Background="Transparent" Margin="10,5,10,5"
+                Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBlock Grid.Row="12" Grid.ColumnSpan="2"
+                   Text="{Binding Status}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <Button Grid.Row="13" Grid.ColumnSpan="2"
+                Click="ButtonClick_Cancel"
+                Style="{StaticResource ButtonCancel}"
+                Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Cancel" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock Text="Отмена операции" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+        <!-- Таймер -->
+        <StackPanel Grid.Row="14" Grid.Column="0" Orientation="Horizontal"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <materialDesign:PackIcon Kind="TimerOutline" VerticalAlignment="Center"
+                                     Margin="5,0,5,0" Width="16" Height="16"/>
+            <TextBlock Text="Время выполнения операции:"
+                       FontSize="12" FontWeight="DemiBold" Margin="0,0,5,0"
+                       VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElapsedTime}" FontSize="12" Margin="0"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
